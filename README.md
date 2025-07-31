@@ -74,6 +74,26 @@ Make sure to update hardcoded paths inside the scripts to match your local envir
 
 ---
 
-## 📄 License
+💻 PowerShell Script: Automated BODS Data Download
+This PowerShell script continuously fetches GTFS and SIRI data from the UK Department for Transport's BODS API.
 
-MIT License. See [LICENSE](LICENSE) file (if applicable).
+🌐 Features
+Runs in an infinite loop, downloading real-time data every 20–40 seconds depending on time of day.
+During the day (00:01 to 23:59), it:
+Downloads GTFS-RT feeds for South West and North East regions.
+Converts .json GTFS files to .csv using json2csv.
+Removes intermediate .json files.
+Outside those hours, it:
+Downloads SIRI-VM and SIRI-SX XML feeds to predefined folders.
+📁 Example Output Structure
+D:/swoutputs/*.csv — South West GTFS
+D:/neoutputs/*.csv — North East GTFS
+D:/sirisw/*.xml, D:/sirine/*.xml, D:/sirisx/*.xml — SIRI feeds
+⚙️ Requirements
+gtfs-realtime CLI tool or similar downloader
+json2csv tool (Node.js CLI)
+🚀 To Run
+Save the script as bods_downloader.ps1 and run it with:
+
+powershell -ExecutionPolicy Bypass -File bods_downloader.ps1
+Make sure the output directories (D:/swoutputs, D:/neoutputs, etc.) exist before execution.
